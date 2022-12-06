@@ -4,18 +4,19 @@ from sqlalchemy import or_, and_, asc
 
 router = APIRouter(
     prefix="/ranks",
-    tags=["users"],
+    tags=["ranks"],
     responses={404: {"description": "Not found"}},
 )
 
 
 
 import models.sales
+import schemas.sales
 import dependencies
 
 @router.get("/")
 def get_ranks(
-    db: Session = Depends(dependencies.get_db)
+    db: Session = Depends(dependencies.get_db),
 ):
     db_rank = db.query(models.sales.Sales).order_by(asc(models.sales.quantity))
     return db_rank
@@ -23,6 +24,15 @@ def get_ranks(
 
 @router.post("/")
 def create_sales(
-    db: Session = Depends(dependencies.get_db) 
+    create_sale: schemas.sales.CreateSales,
+    db: Session = Depends(dependencies.get_db),
 ):
-    return{"b"}
+    db_sale = models.sales.Sales(
+        book_id=create_sale.book_id,
+        quantity=create_sale.quantity,
+        date=create_sale.date
+    )
+    db.add(db_sale)
+    db.flush()
+    db.commit()
+    return {"message": "succses"}
