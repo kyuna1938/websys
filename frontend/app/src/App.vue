@@ -1,14 +1,17 @@
 <template>
   <RankPage />
+  <PieChart />
 </template>
 
 <script>
 import RankPage from './components/RankPage.vue';
+import PieChart from './components/PieChart.vue';
 
 export default {
   name: 'App',
   components: {
-    RankPage
+    RankPage,
+    PieChart
   }
 }
 </script>
