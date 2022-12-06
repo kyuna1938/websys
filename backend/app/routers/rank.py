@@ -13,7 +13,7 @@ router = APIRouter(
 import models.sales
 import dependencies
 
-@router.get()
+@router.get("/")
 def get_ranks(
     db: Session = Depends(dependencies.get_db)
 ):
@@ -21,7 +21,7 @@ def get_ranks(
     return db_rank
 
 
-@router.post()
+@router.post("/")
 def create_sales(
     db: Session = Depends(dependencies.get_db) 
 ):
