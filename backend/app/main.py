@@ -7,11 +7,12 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.status import (HTTP_401_UNAUTHORIZED, HTTP_404_NOT_FOUND,
                               HTTP_500_INTERNAL_SERVER_ERROR)
 
-from routers import rank
+from routers import rank, book
 
 app = FastAPI()
 
 app.include_router(rank.router)
+app.include_router(book.router)
 
 app.add_middleware(
     CORSMiddleware,
