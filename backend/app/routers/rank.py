@@ -16,7 +16,7 @@ import models.books
 import schemas.sales
 import dependencies
 
-@router.get("/")
+@router.get("")
 def get_ranks(
     start_date: date = None,
     end_date: date = None,
@@ -37,7 +37,7 @@ def get_ranks(
     return db_rank
 
 
-@router.post("/")
+@router.post("")
 def create_sales(
     create_sale: schemas.sales.CreateSales,
     db: Session = Depends(dependencies.get_db),

@@ -12,14 +12,14 @@ import models.books
 import schemas.books
 import dependencies
 
-@router.get("/")
+@router.get("")
 def get_books(
     db: Session = Depends(dependencies.get_db),
 ):
     db_book = db.query(models.books.Book).all()
     return db_book
 
-@router.post("/")
+@router.post("")
 def create_book(
     create_book: schemas.books.CreateBook,
     db: Session = Depends(dependencies.get_db),   
