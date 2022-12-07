@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from sqlalchemy import or_, and_, desc, func
 from datetime import datetime, date
+from typing import Any
 
 router = APIRouter(
     prefix="/ranks",
@@ -45,9 +46,32 @@ def create_sales(
     db_sale = models.sales.Sales(
         book_id=create_sale.book_id,
         quantity=create_sale.quantity,
-        date=create_sale.date
+        date=create_sale.date,
+        sex=create_sale.sex,
     )
     db.add(db_sale)
     db.flush()
     db.commit()
     return {"message": "succses"}
+
+@router.get("/{id}")
+def get_gender_ratio(
+    id: int,
+    db: Session = Depends(dependencies.get_db),
+):
+    db_books = db.query(models.sales.Sales).filter(models.sales.Sales.book_id == id).all()
+    db_name = db.query(models.books.Book).filter(models.books.Book.id == id).first()
+    raito: dict[str, Any] = dict()
+    raito['name'] = db_name.name
+    raito['man'] = 0
+    raito['woman'] = 0
+    raito['other'] = 0
+    for db_book in db_books:
+        if db_book.sex == 0:
+            raito['man'] = raito['man'] + db_book.quantity
+        elif db_book.sex == 1:
+            raito['woman'] = raito['woman'] + db_book.quantity
+        elif db_book.sex == 2:
+            raito['other'] = raito['other'] + db_book.quantity
+
+    return raito

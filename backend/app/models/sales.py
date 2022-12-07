@@ -14,11 +14,13 @@ class Sales(Base):
     book_id = Column(Integer, ForeignKey(Book.id), nullable=True)
     quantity = Column(Integer, nullable=False,)
     date = Column(Timestamp, nullable=False, server_default=current_timestamp())
+    sex = Column(Integer, nullable=False)
     
-    def __init__(self, book_id: int, quantity: int, date: datetime):
+    def __init__(self, book_id: int, quantity: int, date: datetime, sex: int):
         self.book_id = book_id
         self.quantity = quantity
         self.date = date
+        self.sex = sex
 
         
     def toDict(self):
@@ -26,4 +28,5 @@ class Sales(Base):
             'id': self.id,
             'book_id': self.name,
             'quantity': self.price,
+            'sex': self.sex
         }
