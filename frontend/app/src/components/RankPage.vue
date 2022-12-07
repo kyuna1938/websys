@@ -18,7 +18,7 @@
         <tbody>
           <tr v-for="(ranking, index) in rankings" :key="ranking.name">
             <td>{{ index + 1 }}</td>
-            <td>{{ ranking.name }}</td>
+            <td><router-link :to="('/novel/' + ranking.book_id)">{{ ranking.name }}</router-link></td>
             <td>{{ ranking.quantity }}</td>
           </tr>
         </tbody>
@@ -53,7 +53,7 @@
         const url = process.env.VUE_APP_API_DEV + '/ranks'
         axios.get(url, { params })
           .then(response => {
-            this.rankings = response.data
+            this.rankings = response.data;
         })
       }
     },

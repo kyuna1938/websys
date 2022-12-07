@@ -1,20 +1,6 @@
 <template>
-  <RankPage />
-  <PieChart />
+  <router-view/>
 </template>
-
-<script>
-import RankPage from './components/RankPage.vue';
-import PieChart from './components/PieChart.vue';
-
-export default {
-  name: 'App',
-  components: {
-    RankPage,
-    PieChart
-  }
-}
-</script>
 
 <style>
 #app {
