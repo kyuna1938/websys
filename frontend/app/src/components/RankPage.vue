@@ -1,12 +1,14 @@
 <template>
     <div>
-      <h1>Y書店売り上げランキング</h1>
-      <form>
-        <label>Start Date:</label>
-        <input type="date" v-model="startDate">
-        <label>End Date:</label>
-        <input type="date" v-model="endDate">
-      </form>
+      <h1 class="mb-4">Y書店売り上げランキング</h1>
+      <div class="mb-4">
+        <form>
+          <label>Start Date:</label>
+          <input type="date" v-model="startDate">
+          <label>End Date:</label>
+          <input type="date" v-model="endDate">
+        </form>
+      </div>
       <table>
         <thead>
           <tr>
